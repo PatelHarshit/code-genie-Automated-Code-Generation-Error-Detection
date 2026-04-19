@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeGenie | Smart AI Assistant</title>
+    <!-- Keep stylesheets in static/style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Syntax Highlighting library (Highlight.js) for code blocks -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fa-solid fa-code"></i>
+                <h1>CodeGenie</h1>
+            </div>
+            <p class="subtitle">Smart AI Assistant for Automated Code Generation & Error Detection</p>
+            <!-- Bonus feature: Theme toggle -->
+            <button id="theme-toggle" class="icon-btn" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </header>
+
+        <!-- Main Content Layout -->
+        <main class="main-layout">
+            
+            <!-- Left Panel: Input Area -->
+            <section class="input-panel">
+                <div class="panel-header">
+                    <h2>Input</h2>
+                    <div class="controls">
+                        <label for="language-select">Language:</label>
+                        <select id="language-select" class="dropdown">
+                            <option value="Python">Python</option>
+                            <option value="C++">C++</option>
+                            <option value="Java">Java</option>
+                            <option value="JavaScript">JavaScript</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Main Textarea for prompt or code -->
+                <textarea id="user-input" 
+                    placeholder="Enter a problem to generate code, or paste code to debug and fix errors...&#10;&#10;e.g., 'Write a python script to scrape a website' or 'def foo() print(bar)'"
+                    spellcheck="false"></textarea>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button id="btn-generate" class="action-btn primary-btn">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Code
+                    </button>
+                    <button id="btn-debug" class="action-btn secondary-btn">
+                        <i class="fa-solid fa-bug-slash"></i> Debug Code
+                    </button>
+                    <!-- Bonus: Voice Input -->
+                    <button id="btn-voice" class="icon-btn tooltip" title="Hold to dictate">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Output Area -->
+            <section class="output-panel">
+                <div class="panel-header">
+                    <h2>Output</h2>
+                    <div class="controls">
+                        <!-- Bonus feature: Copy to Clipboard -->
+                        <button id="btn-copy" class="icon-btn tooltip" title="Copy to clipboard">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                        <button id="btn-history" class="icon-btn tooltip" title="View History">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Output Display Window -->
+                <div class="output-window" id="output-window">
+                    <div class="placeholder-text">
+                        <i class="fa-solid fa-terminal"></i>
+                        <p>Results will appear here...</p>
+                    </div>
+                    
+                    <!-- Loading Indicator -->
+                    <div class="loader-container hidden" id="loader">
+                        <div class="spinner"></div>
+                        <p id="loader-text">Processing your request...</p>
+                    </div>
+                    
+                    <!-- Formatted Content will be injected here. 
+                         We use pre>code structure to support highlight.js -->
+                    <div id="output-content" class="hidden"></div>
+                </div>
+
+                <!-- Optional History Drawer (Hidden by default) -->
+                <div id="history-drawer" class="hidden drawer">
+                    <h3>Recent Queries</h3>
+                    <ul id="history-list">
+                        <!-- Filled dynamically by script.js -->
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Highlight.js and marked.js for markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Link to custom script -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

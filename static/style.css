@@ -1,0 +1,314 @@
+/* Import Modern Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap');
+
+/* CSS Variables for theming (VS Code inspired Dark Theme) */
+:root {
+    --bg-main: #1e1e1e;
+    --bg-panel: #252526;
+    --bg-header: #333333;
+    --text-main: #cccccc;
+    --text-muted: #858585;
+    
+    --accent-primary: #007acc; /* VS Code Blue */
+    --accent-hover: #005f9e;
+    --accent-secondary: #0e639c; /* Lighter Blue */
+    
+    --border-color: #3c3c3c;
+    --scroll-track: #1e1e1e;
+    --scroll-thumb: #424242;
+    
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+    
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Stop main body scrolling, rely on panel scrolls */
+}
+
+/* Layout Containers */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.app-header {
+    background-color: var(--bg-header);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.app-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.app-header h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.app-header .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-left: auto; /* Push to right */
+    margin-right: 20px;
+}
+
+/* Main Split View */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Left & Right Panels */
+.input-panel, .output-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-main);
+    border-right: 1px solid var(--border-color);
+    position: relative;
+}
+
+.output-panel {
+    border-right: none;
+    background-color: var(--bg-panel);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--bg-header);
+    height: 45px;
+}
+
+.panel-header h2 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.controls label {
+    font-size: 0.85rem;
+}
+
+/* Dropdown styling */
+select.dropdown {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Textarea styling (The Input Area) */
+textarea#user-input {
+    flex: 1;
+    width: 100%;
+    background-color: var(--bg-main);
+    color: #e0e0e0;
+    border: none;
+    padding: 15px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+}
+
+/* Output Display Window */
+.output-window {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.placeholder-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.placeholder-text i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Buttons Area */
+.button-group {
+    display: flex;
+    padding: 10px 15px;
+    background-color: var(--bg-header);
+    border-top: 1px solid var(--border-color);
+    gap: 10px;
+    align-items: center;
+}
+
+/* Action Buttons */
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-ui);
+}
+
+.primary-btn {
+    background-color: var(--accent-primary);
+    color: #ffffff;
+}
+.primary-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.secondary-btn {
+    background-color: #333333;
+    color: #ffffff;
+    border-color: #555555;
+}
+.secondary-btn:hover {
+    background-color: #444444;
+}
+
+/* Icon Buttons (Copy, Theme) */
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: var(--radius-sm);
+    transition: color 0.2s, background 0.2s;
+}
+
+.icon-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Loading Indicator */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    border-top-color: var(--accent-primary);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Rendered Markdown & Code formatting */
+#output-content h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #fff;
+    font-family: var(--font-ui);
+}
+#output-content p {
+    font-family: var(--font-ui);
+    margin-bottom: 1em;
+}
+#output-content ul {
+    margin-left: 20px;
+    font-family: var(--font-ui);
+    margin-bottom: 1em;
+}
+
+pre {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 1em;
+}
+
+code {
+    font-family: var(--font-mono);
+}
